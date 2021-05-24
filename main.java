@@ -10,7 +10,7 @@ import java.util.Arrays;
        int sum = 0 ;
        int arr[] =new int[SIZE];
        
-       System.out.print("0부터 100사이의 정수값 10개를 입력하세요 : ");
+       System.out.print("0부터 100사이의 정수값" + SIZE + "개를 입력하세요 : ");
        
        for(int i=0;i<SIZE;i++) {
           
