@@ -6,11 +6,11 @@ import java.util.Arrays;
        
        Scanner input = new Scanner(System.in);
 
-       final int SIZE = 20;
+       final int SIZE = 10;
        int sum = 0 ;
        int arr[] =new int[SIZE];
        
-       System.out.print("0부터 100사이의 정수값 20개를 입력하세요 : ");
+       System.out.print("0부터 100사이의 정수값 10개를 입력하세요 : ");
        
        for(int i=0;i<SIZE;i++) {
           
