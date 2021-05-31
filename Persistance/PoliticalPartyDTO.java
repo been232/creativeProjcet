@@ -1,54 +1,72 @@
 package Persistance;
 
+import java.util.Date;
+
 public class PoliticalPartyDTO { // 정당정책 정보
-	private String id;
-	private String partyName;
-	private int prmsOrd;
-	private String prmsTitle;
-	private String prmsCont;
+	private String jdCode;
+	private String jdName;
+	private Date regDate;
+	private String addr;
+	private String telNum;
 
-	public PoliticalPartyDTO() {
-		super();
+	public PoliticalPartyDTO(){
 	}
-	public PoliticalPartyDTO(String id, String partyName, int prmsOrd, String prmsTitle, String prmsCont) {
-		super();
-		this.id = id;
-		this.partyName = partyName;
-		this.prmsOrd = prmsOrd;
-		this.prmsTitle = prmsTitle;
-		this.prmsCont = prmsCont;
-	}
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getPartyName() {
-		return partyName;
-	}
-	public void setPartyName(String partyName) {
-		this.partyName = partyName;
-	}
-	public int getPrmsOrd() {
-		return prmsOrd;
-	}
-	public void setPrmsOrd(int prmsOrd) {
-		this.prmsOrd = prmsOrd;
-	}
-	public String getPrmsTitle() {
-		return prmsTitle;
-	}
-	public void setPrmsTitle(String prmsTitle) {
-		this.prmsTitle = prmsTitle;
-	}
-	public String getPrmsCont() {
-		return prmsCont;
-	}
-	public void setPrmsCont(String prmsCont) {
-		this.prmsCont = prmsCont;
+	public PoliticalPartyDTO(String jdCode, String jdName, Date regDate, String addr, String telNum) {
+		this.jdCode = jdCode;
+		this.jdName = jdName;
+		this.regDate = regDate;
+		this.addr = addr;
+		this.telNum = telNum;
 	}
 
-	
+	public String getJdCode() {
+		return jdCode;
+	}
+
+	public void setJdCode(String jdCode) {
+		this.jdCode = jdCode;
+	}
+
+	public String getJdName() {
+		return jdName;
+	}
+
+	public void setJdName(String jdName) {
+		this.jdName = jdName;
+	}
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
+	public String getTelNum() {
+		return telNum;
+	}
+
+	public void setTelNum(String telNum) {
+		this.telNum = telNum;
+	}
+
+	@Override
+	public String toString() {
+		return "PoliticalPartyDTO{" +
+				"jdCode='" + jdCode + '\'' +
+				", jdName='" + jdName + '\'' +
+				", regDate=" + regDate +
+				", addr='" + addr + '\'' +
+				", telNum='" + telNum + '\'' +
+				'}';
+	}
 }
