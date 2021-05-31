@@ -1,16 +1,16 @@
-package Model;
+package Persistance;
 
-public class PoliticalParty { // 정당정책 정보
+public class PoliticalPartyDTO { // 정당정책 정보
 	private String id;
 	private String partyName;
 	private int prmsOrd;
 	private String prmsTitle;
 	private String prmsCont;
 
-	public PoliticalParty() {
+	public PoliticalPartyDTO() {
 		super();
 	}
-	public PoliticalParty(String id, String partyName, int prmsOrd, String prmsTitle, String prmsCont) {
+	public PoliticalPartyDTO(String id, String partyName, int prmsOrd, String prmsTitle, String prmsCont) {
 		super();
 		this.id = id;
 		this.partyName = partyName;

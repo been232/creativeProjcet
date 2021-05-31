@@ -1,16 +1,16 @@
-package Model;
+package Persistance;
 
-public class PollingPlace { //투표소 정보
+public class PollingPlaceDTO { //투표소 정보
 	private String id;
 	private String sdName;
 	private String emdName;
 	private String placeName;
 	private String addr;
 	
-	public PollingPlace() {
+	public PollingPlaceDTO() {
 		super();
 	}
-	public PollingPlace(String id, String sdName, String emdName, String placeName, String addr) {
+	public PollingPlaceDTO(String id, String sdName, String emdName, String placeName, String addr) {
 		super();
 		this.id = id;
 		this.sdName = sdName;
