@@ -1,16 +1,16 @@
-package Model;
+package Persistance;
 
-public class SuccessfulCandidate { //당선인 정보
-	private String id;
+public class CandidateDTO {  //후보자 정보
+	private String id; //선거 ID
 	private String name;
 	private String jdName;
 	private String birthday;
 	private String career;
 	
-	public SuccessfulCandidate() {
+	public CandidateDTO() {
 		super();
 	}
-	public SuccessfulCandidate(String id, String name, String jdName, String birthday, String career) {
+	public CandidateDTO(String id, String name, String jdName, String birthday, String career) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -18,7 +18,6 @@ public class SuccessfulCandidate { //당선인 정보
 		this.birthday = birthday;
 		this.career = career;
 	}
-	
 	public String getId() {
 		return id;
 	}
@@ -51,7 +50,7 @@ public class SuccessfulCandidate { //당선인 정보
 	}    
 	@Override
     public String toString() {
-	    return "SuccessfulCandidate [id=" + id + ", name=" + name + ", jdname=" + jdName + ", birthday=" + birthday + ", career=" + career + "]";    
-	}
+        return "Candidate [id=" + id + ", name=" + name + ", jdname=" + jdName + ", birthday=" + birthday + ", career=" + career + "]";
+    }
 
 }

@@ -1,4 +1,4 @@
-package DAO;
+package Persistance;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -8,7 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class parsing {
+public class CandidateDAO {
     public static void main(String[] args) {
 
         // 인증키 (개인이 받아와야함)

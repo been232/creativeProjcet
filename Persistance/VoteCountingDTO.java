@@ -1,16 +1,16 @@
-package Model;
+package Persistance;
 
-public class VoteCounting { // 투표소 투표현황
+public class VoteCountingDTO { // 투표소 투표현황
 	private String id; // 선거 ID
 	private String sdName; // 시도명
 	private int totSunsu; // 총 선거인수
 	private int totTusu; // 총 투표인수
 	private int Turnout; // 투표율
 	
-	public VoteCounting() {
+	public VoteCountingDTO() {
 		super();
 	}
-	public VoteCounting(String id, String sdName, int totSunsu, int totTusu, int Turnout) {
+	public VoteCountingDTO(String id, String sdName, int totSunsu, int totTusu, int Turnout) {
 		super();
 		this.id = id;
 		this.sdName = sdName;
