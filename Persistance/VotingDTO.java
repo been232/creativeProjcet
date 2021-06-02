@@ -1,8 +1,7 @@
 package Persistance;
 
 public class VotingDTO {
-    private String sgCode;
-    private String votingCode;
+    private String sgId;
     private String sdName;
     private String wiwName;
     private int totTusu;
@@ -11,29 +10,20 @@ public class VotingDTO {
     public VotingDTO() {
     }
 
-    public VotingDTO(String sgCode, String votingCode, String sdName, String wiwName, int totTusu, int turnOut) {
-        this.sgCode = sgCode;
-        this.votingCode = votingCode;
+    public VotingDTO(String sgId, String sdName, String wiwName, int totTusu, int turnOut) {
+        this.sgId = sgId;
         this.sdName = sdName;
         this.wiwName = wiwName;
         this.totTusu = totTusu;
         this.turnOut = turnOut;
     }
 
-    public String getSgCode() {
-        return sgCode;
+    public String getSgId() {
+        return sgId;
     }
 
-    public void setSgCode(String sgCode) {
-        this.sgCode = sgCode;
-    }
-
-    public String getVotingCode() {
-        return votingCode;
-    }
-
-    public void setVotingCode(String votingCode) {
-        this.votingCode = votingCode;
+    public void setSgId(String sgId) {
+        this.sgId = sgId;
     }
 
     public String getSdName() {
@@ -70,9 +60,8 @@ public class VotingDTO {
 
     @Override
     public String toString() {
-        return "Voting{" +
-                "sgCode='" + sgCode + '\'' +
-                ", votingCode='" + votingCode + '\'' +
+        return "VotingDTO{" +
+                "sgId='" + sgId + '\'' +
                 ", sdName='" + sdName + '\'' +
                 ", wiwName='" + wiwName + '\'' +
                 ", totTusu=" + totTusu +
