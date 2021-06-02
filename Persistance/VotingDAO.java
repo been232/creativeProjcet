@@ -28,8 +28,6 @@ public class VotingDAO {
             JSONObject votingResult = (JSONObject) jsonObject.get("getVoteSttusInfoInqire");
             JSONArray item = (JSONArray) votingResult.get("item");
 
-            int i = 0;
-
             for(Object o : item) {
                 JSONObject voting = (JSONObject) o;
                 String sgId = (String) voting.get("SG_ID");

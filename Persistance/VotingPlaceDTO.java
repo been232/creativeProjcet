@@ -66,14 +66,6 @@ public class VotingPlaceDTO {
         return emdName;
     }
 
-    public String getWiwName() {
-        return wiwName;
-    }
-
-    public void setWiwName(String wiwName) {
-        this.wiwName = wiwName;
-    }
-
     public void setEmdName(String emdName) {
         this.emdName = emdName;
     }

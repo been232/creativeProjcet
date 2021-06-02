@@ -3,6 +3,7 @@ package Persistance;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -31,7 +32,7 @@ public class CandidateDAO {
             JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
             JSONObject candidateResult = (JSONObject)jsonObject.get("getPofelcddRegistSttusInfoInqire");
             JSONArray item = (JSONArray) candidateResult.get("item");
-            int i = 0;
+            ArrayList<String> aList = new ArrayList<>();
             for (Object o : item) {
                 JSONObject candidate = (JSONObject) o;
                 String sgId = (String) candidate.get("SG_ID");
