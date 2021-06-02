@@ -1,7 +1,7 @@
 package Persistance;
 
 public class PolicyDTO {
-    private String sgCode;
+    private String sgId;
     private String jdCode;
     private int prmsCnt;
     private String prmsRealmName;
@@ -10,8 +10,9 @@ public class PolicyDTO {
 
     public PolicyDTO(){
     }
-    public PolicyDTO(String sgCode, String jdCode, int prmsCnt, String prmsRealmName, String prmsTitle, String prmsCont) {
-        this.sgCode = sgCode;
+
+    public PolicyDTO(String sgId, String jdCode, int prmsCnt, String prmsRealmName, String prmsTitle, String prmsCont) {
+        this.sgId = sgId;
         this.jdCode = jdCode;
         this.prmsCnt = prmsCnt;
         this.prmsRealmName = prmsRealmName;
@@ -19,12 +20,12 @@ public class PolicyDTO {
         this.prmsCont = prmsCont;
     }
 
-    public String getSgCode() {
-        return sgCode;
+    public String getSgId() {
+        return sgId;
     }
 
-    public void setSgCode(String sgCode) {
-        this.sgCode = sgCode;
+    public void setSgId(String sgId) {
+        this.sgId = sgId;
     }
 
     public String getJdCode() {
@@ -70,7 +71,7 @@ public class PolicyDTO {
     @Override
     public String toString() {
         return "PolicyDTO{" +
-                "sgCode='" + sgCode + '\'' +
+                "sgId='" + sgId + '\'' +
                 ", jdCode='" + jdCode + '\'' +
                 ", prmsCnt=" + prmsCnt +
                 ", prmsRealmName='" + prmsRealmName + '\'' +
