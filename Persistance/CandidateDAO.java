@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class CandidateDAO {
-    public static void main(String args[]) {        // parsing으로 네이밍 변경 필요
+    public static void main(String[] args) {        // parsing으로 네이밍 변경 필요
         // 인증키 (개인이 받아와야함)
         String key = "y9FWlTb%2BlJWwvrBNeooAhHEHzOKRLkQkNz8RsSVu5TTpBz9lFSobT9LwSUOa1hFFYcL%2FWjMMZ%2Bm8yJxUdwsiGg%3D%3D";
 

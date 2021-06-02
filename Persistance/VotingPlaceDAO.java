@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class VotingPlaceDAO {
-    public static void main(String args[]) {        // parsing으로 네이밍 변경 필요
+    public static void main(String[] args) {        // parsing으로 네이밍 변경 필요
         String[] sd = new String[]{
                 "서울특별시", "부산광역시", "대구광역시",
                 "인천광역시", "광주광역시", "대전광역시",
