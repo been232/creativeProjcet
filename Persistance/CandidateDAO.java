@@ -9,8 +9,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class CandidateDAO {
-    public static void main(String args[]) {
-
+    public static void main(String args[]) {        // parsing으로 네이밍 변경 필요
         // 인증키 (개인이 받아와야함)
         String key = "y9FWlTb%2BlJWwvrBNeooAhHEHzOKRLkQkNz8RsSVu5TTpBz9lFSobT9LwSUOa1hFFYcL%2FWjMMZ%2Bm8yJxUdwsiGg%3D%3D";
 
@@ -52,23 +51,6 @@ public class CandidateDAO {
                 String edu = (String) candidate.get("EDU");
                 String career = (String) candidate.get("CAREER1");
                 String status = (String) candidate.get("STATUS");
-                System.out.println(sgId);
-                System.out.println(huboId);
-                System.out.println(sggName);
-                System.out.println(sdName);
-                System.out.println(wiwName);
-                System.out.println(jdName);
-                System.out.println(name);
-                System.out.println(hanjaName);
-                System.out.println(gender);
-                System.out.println(birthday);
-                System.out.println(age);
-                System.out.println(job);
-                System.out.println(edu);
-                System.out.println(career);
-                System.out.println(status);
-                System.out.println("----------------"+i+"----------------");
-                i++;
             }
 
         }catch(Exception e) {

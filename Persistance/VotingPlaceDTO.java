@@ -5,6 +5,7 @@ public class VotingPlaceDTO {
     private String psCode;
     private String psName;
     private String sdName;
+    private String wiwName;
     private String emdName;
     private String placeName;
     private String addr;
@@ -55,6 +56,10 @@ public class VotingPlaceDTO {
         this.sdName = sdName;
     }
 
+    public String getWiwName() { return wiwName; }
+
+    public void setWiwName(String wiwName) { this.wiwName = wiwName; }
+
     public String getEmdName() {
         return emdName;
     }
@@ -94,6 +99,7 @@ public class VotingPlaceDTO {
                 ", psCode='" + psCode + '\'' +
                 ", psName='" + psName + '\'' +
                 ", sdName='" + sdName + '\'' +
+                ", wiwName='" + wiwName + '\'' +
                 ", emdName='" + emdName + '\'' +
                 ", placeName='" + placeName + '\'' +
                 ", addr='" + addr + '\'' +
