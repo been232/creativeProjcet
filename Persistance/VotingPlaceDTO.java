@@ -1,7 +1,7 @@
 package Persistance;
 
 public class VotingPlaceDTO {
-    private String sgCode;
+    private String sgId;
     private String psCode;
     private String psName;
     private String sdName;
@@ -12,8 +12,9 @@ public class VotingPlaceDTO {
 
     public VotingPlaceDTO(){
     }
-    public VotingPlaceDTO(String sgCode, String psCode, String psName, String sdName, String emdName, String placeName, String addr, String floor) {
-        this.sgCode = sgCode;
+
+    public VotingPlaceDTO(String sgId, String psCode, String psName, String sdName, String emdName, String placeName, String addr, String floor) {
+        this.sgId = sgId;
         this.psCode = psCode;
         this.psName = psName;
         this.sdName = sdName;
@@ -23,12 +24,12 @@ public class VotingPlaceDTO {
         this.floor = floor;
     }
 
-    public String getSgCode() {
-        return sgCode;
+    public String getSgId() {
+        return sgId;
     }
 
-    public void setSgCode(String sgCode) {
-        this.sgCode = sgCode;
+    public void setSgId(String sgId) {
+        this.sgId = sgId;
     }
 
     public String getPsCode() {
@@ -89,8 +90,8 @@ public class VotingPlaceDTO {
 
     @Override
     public String toString() {
-        return "VotingPlace{" +
-                "sgCode='" + sgCode + '\'' +
+        return "VotingPlaceDTO{" +
+                "sgId='" + sgId + '\'' +
                 ", psCode='" + psCode + '\'' +
                 ", psName='" + psName + '\'' +
                 ", sdName='" + sdName + '\'' +

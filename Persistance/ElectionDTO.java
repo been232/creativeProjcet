@@ -3,16 +3,17 @@ package Persistance;
 import java.util.Date;
 
 public class ElectionDTO {
-    private String sgCode;
+    private String sgId;
     private String sgName;
     private Date sgVotedate;
 
     public ElectionDTO(){
     }
-    public ElectionDTO(String sgCode, String sgName, Date sgVotedate){
-        this.sgCode=sgCode;
-        this.sgName=sgName;
-        this.sgVotedate=sgVotedate;
+
+    public ElectionDTO(String sgId, String sgName, Date sgVotedate) {
+        this.sgId = sgId;
+        this.sgName = sgName;
+        this.sgVotedate = sgVotedate;
     }
 
     public Date getSgVotedate() {
@@ -27,16 +28,19 @@ public class ElectionDTO {
     public void setSgName(String sgName) {
         this.sgName = sgName;
     }
-    public String getSgCode() {
-        return sgCode;
+
+    public String getSgId() {
+        return sgId;
     }
-    public void setSgCode(String sgCode) {
-        this.sgCode = sgCode;
+
+    public void setSgId(String sgId) {
+        this.sgId = sgId;
     }
+
     @Override
     public String toString() {
         return "ElectionDTO{" +
-                "sgCode='" + sgCode + '\'' +
+                "sgId='" + sgId + '\'' +
                 ", sgName='" + sgName + '\'' +
                 ", sgVotedate=" + sgVotedate +
                 '}';

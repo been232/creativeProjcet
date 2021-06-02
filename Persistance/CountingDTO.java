@@ -1,7 +1,7 @@
 package Persistance;
 
 public class CountingDTO {
-    private String sgCode;
+    private String sgID;
     private String votingCode;
     private String countingCode;
     private String jdName;
@@ -11,9 +11,8 @@ public class CountingDTO {
     public CountingDTO() {
   }
 
-    public CountingDTO(String sgCode, String votingCode, String countingCode, String jdName, String hbName, int dugsu) {
-
-        this.sgCode = sgCode;
+    public CountingDTO(String sgID, String votingCode, String countingCode, String jdName, String hbName, int dugsu) {
+        this.sgID = sgID;
         this.votingCode = votingCode;
         this.countingCode = countingCode;
         this.jdName = jdName;
@@ -21,12 +20,12 @@ public class CountingDTO {
         this.dugsu = dugsu;
     }
 
-    public String getSgCode() {
-        return sgCode;
+    public String getSgID() {
+        return sgID;
     }
 
-    public void setSgCode(String sgCode) {
-        this.sgCode = sgCode;
+    public void setSgID(String sgID) {
+        this.sgID = sgID;
     }
 
     public String getVotingCode() {
@@ -71,8 +70,8 @@ public class CountingDTO {
 
     @Override
     public String toString() {
-        return "Counting{" +
-                "sgCode='" + sgCode + '\'' +
+        return "CountingDTO{" +
+                "sgID='" + sgID + '\'' +
                 ", votingCode='" + votingCode + '\'' +
                 ", countingCode='" + countingCode + '\'' +
                 ", jdName='" + jdName + '\'' +

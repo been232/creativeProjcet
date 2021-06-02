@@ -3,7 +3,7 @@ package Persistance;
 import java.util.Date;
 
 public class CandidateDTO {  //후보자 정보
-	private String sgCode;
+	private String sgId;
 	private String huboId;
 	private String sggName;
 	private String sdName;
@@ -24,8 +24,8 @@ public class CandidateDTO {  //후보자 정보
 
 	public CandidateDTO(){
 	}
-	public CandidateDTO(String sgCode, String huboId, String sggName, String sdName, String wiwName, int giho, String jdName, String jdCode, String name, String hanjaName, String gender, Date birthday, int age, String job, String edu, String career1, String career2, String status) {
-		this.sgCode = sgCode;
+	public CandidateDTO(String sgId, String huboId, String sggName, String sdName, String wiwName, int giho, String jdName, String jdCode, String name, String hanjaName, String gender, Date birthday, int age, String job, String edu, String career1, String career2, String status) {
+		this.sgId = sgId;
 		this.huboId = huboId;
 		this.sggName = sggName;
 		this.sdName = sdName;
@@ -45,12 +45,12 @@ public class CandidateDTO {  //후보자 정보
 		this.status = status;
 	}
 
-	public String getSgCode() {
-		return sgCode;
+	public String getSgId() {
+		return sgId;
 	}
 
-	public void setSgCode(String sgCode) {
-		this.sgCode = sgCode;
+	public void setSgId(String sgId) {
+		this.sgId = sgId;
 	}
 
 	public String getHuboId() {
@@ -192,7 +192,7 @@ public class CandidateDTO {  //후보자 정보
 	@Override
 	public String toString() {
 		return "CandidateDTO{" +
-				"sgCode='" + sgCode + '\'' +
+				"sgId='" + sgId + '\'' +
 				", huboId='" + huboId + '\'' +
 				", sggName='" + sggName + '\'' +
 				", sdName='" + sdName + '\'' +
