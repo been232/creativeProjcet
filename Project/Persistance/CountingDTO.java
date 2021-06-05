@@ -1,4 +1,4 @@
-package Persistance;
+package Project.Persistance;
 
 public class CountingDTO {
     private String sgID;

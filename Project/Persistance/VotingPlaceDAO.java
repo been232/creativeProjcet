@@ -1,4 +1,4 @@
-package Persistance;
+package Project.Persistance;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,6 +11,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class VotingPlaceDAO {
+    public VotingPlaceDAO() {}
+
     public static void main(String[] args) {        // parsing으로 네이밍 변경 필요
         String[] sd = new String[]{
                 "서울특별시", "부산광역시", "대구광역시",
@@ -20,15 +22,11 @@ public class VotingPlaceDAO {
                 "전라북도", "전라남도", "경상북도",
                 "경상남도", "제주특별자치도"
         };
-        String[][] sdList = {
-                {""}
-        };
         String key = "y9FWlTb%2BlJWwvrBNeooAhHEHzOKRLkQkNz8RsSVu5TTpBz9lFSobT9LwSUOa1hFFYcL%2FWjMMZ%2Bm8yJxUdwsiGg%3D%3D";
         String result = "";
-        ArrayList<String> sdNameList = new ArrayList<String>();
         try {
             for(int i = 0; i < sd.length; i++) {
-                String sdEncodeResult = URLEncoder.encode(sd[0], "UTF-8");
+                String sdEncodeResult = URLEncoder.encode(sd[i], "UTF-8");
                 URL url = new URL("http://apis.data.go.kr/9760000/PolplcInfoInqireService2/getPolplcOtlnmapTrnsportInfoInqire?serviceKey=" + key + "&pageNo=1&numOfRows=5000&resultType=json&sgId=20200415&sdName=" + sdEncodeResult + "&");
 
                 BufferedReader bf;
