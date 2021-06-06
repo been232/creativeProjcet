@@ -10,11 +10,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class PolicyDAO {
+import java.sql.*;
+
+public class PolicyDAO extends BasicDAOImpl {
 
     public PolicyDAO() {}
 
-    static public void main(String[] args) {
+    public void parsing() {
         String[] policyArray = new String[] {
                 "더불어민주당", "미래통합당", "우리공화당", "민중당",
                 "가자!평화인권당", "공화당", "국가혁명배당금당", "국민새정당",
@@ -43,25 +45,35 @@ public class PolicyDAO {
                 JSONObject jsonObject = (JSONObject) jsonParser.parse(result);
                 JSONObject policyResult = (JSONObject) jsonObject.get("getPartyPlcInfoInqire");
                 JSONArray item = (JSONArray) policyResult.get("item");
-
+                System.out.println(item.size());
                 for(Object o : item) {
                     JSONObject policy = (JSONObject) o;
                     String sgId = (String) policy.get("sgId");
                     String jdName = (String) policy.get("partyName");
                     String prmsCnt = (String) policy.get("prmsCnt");
+                    ArrayList<String> prmsRealmNameList = new ArrayList<>();
+                    ArrayList<String> prmsTitleList = new ArrayList<>();
+                    ArrayList<String> prmmContList = new ArrayList<>();
+                    ArrayList<String> prmsOrdList = new ArrayList<>();
+                    for(int j = 1; j <= Integer.parseInt(prmsCnt); j++) {
+                        String prmsRealmNameTag = "prmsRealmName" + j;
+                        String prmsTitleTag = "prmsTitle" + j;
+                        String prmmContTag = "prmmCont" + j;
+                        String prmsOrdTag = "prmsOrd" + j;
 
-//                    for(int j = 1; j <= Integer.parseInt(prmsCnt); j++) {
-//                        String prmsRealmNameTag = "prmsRealmName" + j;
-//                        String prmsTitleTag = "prmsTitle" + j;
-//                        String prmmContTag = "prmmCont" + j;
-//
-//                        String prmsRealmName = (String) policy.get(prmsRealmNameTag);
-//                        String prmsTitle = (String) policy.get(prmsTitleTag);
-//                        String prmmCont = (String) policy.get(prmmContTag);
-//
-//
-//                    }
-                    System.out.println(jdName + ": " + prmsCnt);
+                        String prmsRealmName = (String) policy.get(prmsRealmNameTag);
+                        String prmsTitle = (String) policy.get(prmsTitleTag);
+                        String prmmCont = (String) policy.get(prmmContTag);
+                        String prmsOrd = (String) policy.get(prmsOrdTag);
+
+                        prmsRealmNameList.add(prmsRealmName);
+                        prmsTitleList.add(prmsTitle);
+                        prmmContList.add(prmmCont);
+                        prmsOrdList.add(prmsOrd);
+
+
+                    }
+                    insert(sgId, jdName, prmsRealmNameList, prmsOrdList, prmsTitleList, prmmContList);
                 }
 
             }
@@ -71,5 +83,93 @@ public class PolicyDAO {
             e.printStackTrace();
         }
        // return dbResult;
+    }
+    public String getSql (int i) {
+        String sql = "";
+        switch(i) {
+            case 1 :
+                sql = "INSERT INTO policy(sgId, jdName, prmsOrd1, prmsRealmName1, prmsTitle1, prmmCont1) values(?,?,?,?,?,?)";
+                break;
+            case 2:
+                sql = "INSERT INTO policy(sgId, jdName, prmsOrd2, prmsRealmName2, prmsTitle2, prmmCont2) values(?,?,?,?,?,?)";
+                break;
+            case 3:
+                sql = "INSERT INTO policy(sgId, jdName, prmsOrd3, prmsRealmName3, prmsTitle3, prmmCont3) values(?,?,?,?,?,?)";
+                break;
+            case 4:
+                sql = "INSERT INTO policy(sgId, jdName, prmsOrd4, prmsRealmName4, prmsTitle4, prmmCont4) values(?,?,?,?,?,?)";
+                break;
+            case 5:
+                sql = "INSERT INTO policy(sgId, jdName, prmsOrd5, prmsRealmName5, prmsTitle5, prmmCont5) values(?,?,?,?,?,?)";
+                break;
+            case 6:
+                sql = "INSERT INTO policy(sgId, jdName, prmsOrd6, prmsRealmName6, prmsTitle6, prmmCont6) values(?,?,?,?,?,?)";
+                break;
+            case 7:
+                sql = "INSERT INTO policy(sgId, jdName, prmsOrd7, prmsRealmName7, prmsTitle7, prmmCont7) values(?,?,?,?,?,?)";
+                break;
+            case 8:
+                sql = "INSERT INTO policy(sgId, jdName, prmsOrd8, prmsRealmName8, prmsTitle8, prmmCont8) values(?,?,?,?,?,?)";
+                break;
+            case 9:
+                sql = "INSERT INTO policy(sgId, jdName, prmsOrd9, prmsRealmName9, prmsTitle9, prmmCont9) values(?,?,?,?,?,?)";
+                break;
+            case 10:
+                sql = "INSERT INTO policy(sgId, jdName, prmsOrd10, prmsRealmName10, prmsTitle10, prmmCont10) values(?,?,?,?,?,?)";
+                break;
+            default :
+                break;
+
+        }
+        return sql;
+    }
+
+    public int insert(String sgId, String jdName, ArrayList<String> prmsRealmNameList, ArrayList<String> prmsOrdList, ArrayList<String> prmsTitleList, ArrayList<String> prmmContList) {
+
+        String sql = "INSERT INTO policy(sgId, jdName, prmsOrd1, prmsOrd2, prmsOrd3, prmsOrd4, prmsOrd5, prmsOrd6, prmsOrd7, prmsOrd8, prmsOrd9, prmsOrd10, " +
+                "prmsRealmName1, prmsRealmName2, prmsRealmName3, prmsRealmName4, prmsRealmName5, prmsRealmName6, prmsRealmName7, prmsRealmName8, prmsRealmName9, prmsRealmName10, " +
+                "prmsTitle1, prmsTitle2, prmsTitle3, prmsTitle4, prmsTitle5, prmsTitle6, prmsTitle7, prmsTitle8, prmsTitle9, prmsTitle10, " +
+                "prmmCont1, prmmCont2, prmmCont3, prmmCont4, prmmCont5, prmmCont6, prmmCont7, prmmCont8, prmmCont9, prmmCont10) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        PreparedStatement pstmt = null;
+
+        int result = 0;
+
+        try {
+            getConnection();
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, sgId);
+            pstmt.setString(2, jdName);
+            int i = 3;
+            for(int j = 0; j < prmsOrdList.size(); j++) {
+                pstmt.setString(j + i, prmsOrdList.get(j));
+            }
+            i = i + prmsOrdList.size();
+            for(int j = 0; j < prmsRealmNameList.size(); j++) {
+                pstmt.setString(j + i, prmsRealmNameList.get(j));
+            }
+            i = i + prmsRealmNameList.size();
+            for(int j = 0; j < prmsTitleList.size(); j++) {
+                pstmt.setString(j + i, prmsTitleList.get(j));
+            }
+            i = i + prmsTitleList.size();
+            for(int j = 0; j < prmmContList.size(); j++) {
+                pstmt.setString(j + i, prmmContList.get(j));
+            };
+
+            result = pstmt.executeUpdate();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(pstmt != null) pstmt.close();
+                if(conn != null) conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+
+        return result;
     }
 }
