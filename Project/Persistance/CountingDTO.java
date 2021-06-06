@@ -2,8 +2,9 @@ package Project.Persistance;
 
 public class CountingDTO {
     private String sgID;
-    private String votingCode;
-    private String countingCode;
+    private String sggName;
+    private String sdName;
+    private String wiwName;
     private String jdName;
     private String hbName;
     private int dugsu;
@@ -11,10 +12,11 @@ public class CountingDTO {
     public CountingDTO() {
   }
 
-    public CountingDTO(String sgID, String votingCode, String countingCode, String jdName, String hbName, int dugsu) {
+    public CountingDTO(String sgID, String sggName, String sdName, String wiwName, String jdName, String hbName, int dugsu) {
         this.sgID = sgID;
-        this.votingCode = votingCode;
-        this.countingCode = countingCode;
+        this.sggName = sggName;
+        this.sdName = sdName;
+        this.wiwName = wiwName;
         this.jdName = jdName;
         this.hbName = hbName;
         this.dugsu = dugsu;
@@ -28,20 +30,28 @@ public class CountingDTO {
         this.sgID = sgID;
     }
 
-    public String getVotingCode() {
-        return votingCode;
+    public String getSggName() {
+        return sggName;
     }
 
-    public void setVotingCode(String votingCode) {
-        this.votingCode = votingCode;
+    public void setSggName(String sggName) {
+        this.sggName = sggName;
     }
 
-    public String getCountingCode() {
-        return countingCode;
+    public String getSdName() {
+        return sdName;
     }
 
-    public void setCountingCode(String countingCode) {
-        this.countingCode = countingCode;
+    public void setSdName(String sdName) {
+        this.sdName = sdName;
+    }
+
+    public String getWiwName() {
+        return wiwName;
+    }
+
+    public void setWiwName(String wiwName) {
+        this.wiwName = wiwName;
     }
 
     public String getJdName() {
@@ -72,8 +82,9 @@ public class CountingDTO {
     public String toString() {
         return "CountingDTO{" +
                 "sgID='" + sgID + '\'' +
-                ", votingCode='" + votingCode + '\'' +
-                ", countingCode='" + countingCode + '\'' +
+                ", sggName='" + sggName + '\'' +
+                ", sdName='" + sdName + '\'' +
+                ", wiwName='" + wiwName + '\'' +
                 ", jdName='" + jdName + '\'' +
                 ", hbName='" + hbName + '\'' +
                 ", dugsu=" + dugsu +
