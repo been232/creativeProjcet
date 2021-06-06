@@ -70,8 +70,12 @@ public class PolicyDAO extends BasicDAOImpl {
                         prmsTitleList.add(prmsTitle);
                         prmmContList.add(prmmCont);
                         prmsOrdList.add(prmsOrd);
-
-
+                    }
+                    if(prmsOrdList.size() == 9) {
+                        prmsRealmNameList.add("null");
+                        prmsTitleList.add("null");
+                        prmmContList.add("null");
+                        prmsOrdList.add("10");
                     }
                     insert(sgId, jdName, prmsRealmNameList, prmsOrdList, prmsTitleList, prmmContList);
                 }
@@ -83,45 +87,6 @@ public class PolicyDAO extends BasicDAOImpl {
             e.printStackTrace();
         }
        // return dbResult;
-    }
-    public String getSql (int i) {
-        String sql = "";
-        switch(i) {
-            case 1 :
-                sql = "INSERT INTO policy(sgId, jdName, prmsOrd1, prmsRealmName1, prmsTitle1, prmmCont1) values(?,?,?,?,?,?)";
-                break;
-            case 2:
-                sql = "INSERT INTO policy(sgId, jdName, prmsOrd2, prmsRealmName2, prmsTitle2, prmmCont2) values(?,?,?,?,?,?)";
-                break;
-            case 3:
-                sql = "INSERT INTO policy(sgId, jdName, prmsOrd3, prmsRealmName3, prmsTitle3, prmmCont3) values(?,?,?,?,?,?)";
-                break;
-            case 4:
-                sql = "INSERT INTO policy(sgId, jdName, prmsOrd4, prmsRealmName4, prmsTitle4, prmmCont4) values(?,?,?,?,?,?)";
-                break;
-            case 5:
-                sql = "INSERT INTO policy(sgId, jdName, prmsOrd5, prmsRealmName5, prmsTitle5, prmmCont5) values(?,?,?,?,?,?)";
-                break;
-            case 6:
-                sql = "INSERT INTO policy(sgId, jdName, prmsOrd6, prmsRealmName6, prmsTitle6, prmmCont6) values(?,?,?,?,?,?)";
-                break;
-            case 7:
-                sql = "INSERT INTO policy(sgId, jdName, prmsOrd7, prmsRealmName7, prmsTitle7, prmmCont7) values(?,?,?,?,?,?)";
-                break;
-            case 8:
-                sql = "INSERT INTO policy(sgId, jdName, prmsOrd8, prmsRealmName8, prmsTitle8, prmmCont8) values(?,?,?,?,?,?)";
-                break;
-            case 9:
-                sql = "INSERT INTO policy(sgId, jdName, prmsOrd9, prmsRealmName9, prmsTitle9, prmmCont9) values(?,?,?,?,?,?)";
-                break;
-            case 10:
-                sql = "INSERT INTO policy(sgId, jdName, prmsOrd10, prmsRealmName10, prmsTitle10, prmmCont10) values(?,?,?,?,?,?)";
-                break;
-            default :
-                break;
-
-        }
-        return sql;
     }
 
     public int insert(String sgId, String jdName, ArrayList<String> prmsRealmNameList, ArrayList<String> prmsOrdList, ArrayList<String> prmsTitleList, ArrayList<String> prmmContList) {
@@ -145,15 +110,15 @@ public class PolicyDAO extends BasicDAOImpl {
             for(int j = 0; j < prmsOrdList.size(); j++) {
                 pstmt.setString(j + i, prmsOrdList.get(j));
             }
-            i = i + prmsOrdList.size();
+            i = 13;
             for(int j = 0; j < prmsRealmNameList.size(); j++) {
                 pstmt.setString(j + i, prmsRealmNameList.get(j));
             }
-            i = i + prmsRealmNameList.size();
+            i = 23;
             for(int j = 0; j < prmsTitleList.size(); j++) {
                 pstmt.setString(j + i, prmsTitleList.get(j));
             }
-            i = i + prmsTitleList.size();
+            i = 33;
             for(int j = 0; j < prmmContList.size(); j++) {
                 pstmt.setString(j + i, prmmContList.get(j));
             };
