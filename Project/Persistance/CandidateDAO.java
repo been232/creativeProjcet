@@ -9,6 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 
 public class CandidateDAO extends BasicDAOImpl {
@@ -147,6 +148,38 @@ public class CandidateDAO extends BasicDAOImpl {
                 throw new RuntimeException(e.getMessage());
             }
         }
+        return candidateList;
+    }
+
+    public ArrayList<CandidateDTO> getCandidateName(String sggName) {
+        ArrayList<CandidateDTO> candidateList = new ArrayList<>();
+        String sql = " SELECT name FROM project.candidate WHERE sggName = ?";
+
+        PreparedStatement pstmt = null;
+        ResultSet result = null;
+
+        try {
+            getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, sggName);
+            result = pstmt.executeQuery();
+            while(result.next()) {
+                CandidateDTO candidate = new CandidateDTO();
+                candidate.setName(result.getString("name"));
+                candidateList.add(candidate);
+            }
+        }catch (SQLException se) {
+            se.printStackTrace();
+        }finally {
+            try {
+                if(pstmt != null) pstmt.close();
+                if(conn != null) conn.close();
+                if(result != null) result.close();
+            } catch(Exception e){
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+
         return candidateList;
     }
 

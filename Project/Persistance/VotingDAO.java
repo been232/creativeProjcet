@@ -12,11 +12,12 @@ import org.json.simple.parser.JSONParser;
 import java.sql.*;
 
 
-public class VotingDAO extends BasicDAOImpl  {
-    public VotingDAO(){
+public class VotingDAO extends BasicDAOImpl {
+    public VotingDAO() {
 
     }
-    public int parsing(){
+
+    public int parsing() {
         String key = "y9FWlTb%2BlJWwvrBNeooAhHEHzOKRLkQkNz8RsSVu5TTpBz9lFSobT9LwSUOa1hFFYcL%2FWjMMZ%2Bm8yJxUdwsiGg%3D%3D";
 
         String result = "";
@@ -38,7 +39,7 @@ public class VotingDAO extends BasicDAOImpl  {
             JSONArray item = (JSONArray) votingResult.get("item");
             ArrayList<String> aList = new ArrayList<>();
 
-            for(Object o : item) {
+            for (Object o : item) {
                 JSONObject voting = (JSONObject) o;
                 String sgId = (String) voting.get("SG_ID");
                 String sdName = (String) voting.get("SD_NAME");
@@ -49,12 +50,13 @@ public class VotingDAO extends BasicDAOImpl  {
                     insert(sgId, sdName, wiwName, totTusu, turnOut);
                 }
             }
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dbResult;
     }
-    public int insert(String sgId, String sdName, String wiwName, String totTusu, String turnOut){
+
+    public int insert(String sgId, String sdName, String wiwName, String totTusu, String turnOut) {
         String sql = "INSERT INTO voting(sgId,sdName,wiwName,totTusu,turnOut) values(?,?,?,?,?)";
 
         PreparedStatement pstmt = null;
@@ -96,7 +98,7 @@ public class VotingDAO extends BasicDAOImpl  {
             pstmt = conn.prepareStatement(sql);
             result = pstmt.executeQuery();
 
-            while(result.next()) {
+            while (result.next()) {
                 VotingDTO voting = new VotingDTO();
                 voting.setSgId(result.getString("sgId"));
                 voting.setSdName(result.getString("sdName"));
@@ -109,10 +111,43 @@ public class VotingDAO extends BasicDAOImpl  {
             se.printStackTrace();
         } finally {
             try {
-                if(pstmt != null) pstmt.close();
-                if(conn != null) conn.close();
-                if(result != null) result.close();
-            } catch(Exception e) {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+                if (result != null) result.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+
+        return votingList;
+    }
+
+    public ArrayList<VotingDTO> getSdName() {
+        ArrayList<VotingDTO> votingList = new ArrayList<>();
+        String sql = "SELECT sdName, wiwName FROM voting";
+
+        PreparedStatement pstmt = null;
+        ResultSet result = null;
+        VotingDTO voting = new VotingDTO();
+
+        try {
+            getConnection();
+            pstmt = conn.prepareStatement(sql);
+            result = pstmt.executeQuery();
+
+            while (result.next()) {
+                voting.setSdName(result.getString("sdName"));
+                voting.setWiwName(result.getString("wiwName"));
+                votingList.add(voting);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if (result != null) result.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
                 throw new RuntimeException(e.getMessage());
             }
         }
