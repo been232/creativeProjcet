@@ -43,24 +43,28 @@ public class ClientConnecting {
             BufferedReader br = null;
             PrintWriter pw = null;
             ObjectOutputStream oos = null;
-
+            ObjectInputStream ois = null;
             try {
-                is = clSocket.getInputStream();
-                br = new BufferedReader(new InputStreamReader(is));
-                os = clSocket.getOutputStream();
-                pw = new PrintWriter(os, true);
+//                is = clSocket.getInputStream();
+//                br = new BufferedReader(new InputStreamReader(is));
+//                os = clSocket.getOutputStream();
+//                pw = new PrintWriter(os, true);
                 oos = new ObjectOutputStream(clSocket.getOutputStream());
+                ois = new ObjectInputStream(clSocket.getInputStream());
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             String line = null;
             try {
-                line = br.readLine();
+//                line = br.readLine();
+                line = (String) ois.readObject();
                 System.out.println(line);
-                oos.writeObject(checkProtocol((line)));
+                ArrayList<CandidateDTO> dto = checkProtocol(line);
+                oos.writeObject(dto);
+                System.out.println(dto.get(0).getName());
                 oos.flush();
-            } catch (IOException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
 
@@ -70,7 +74,7 @@ public class ClientConnecting {
         }
     }
 
-    private ArrayList checkProtocol(String request) {
+    private ArrayList<CandidateDTO> checkProtocol(String request) {
         String result = null;
         ArrayList<CandidateDTO> candidateInfoTaskArrayList= new ArrayList<>();
         int code;
