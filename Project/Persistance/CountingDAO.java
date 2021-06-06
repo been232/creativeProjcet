@@ -108,4 +108,43 @@ public class CountingDAO extends BasicDAOImpl{
 
         return result;
     }
+
+    public ArrayList<CountingDTO> getCountingInfo() {
+        ArrayList<CountingDTO> countingList = new ArrayList<>();
+        String sql = "SELECT * FROM counting";
+
+        PreparedStatement pstmt = null;
+        ResultSet result = null;
+
+        try {
+            getConnection();
+            pstmt = conn.prepareStatement(sql);
+            result = pstmt.executeQuery();
+
+            while(result.next()) {
+                CountingDTO counting = new CountingDTO();
+                counting.setSgID(result.getString("sgId"));
+                counting.setSggName(result.getString("sggName"));
+                counting.setSdName(result.getString("sdName"));
+                counting.setWiwName(result.getString("wiwName"));
+                counting.setJdName(result.getString("jdName"));
+                counting.setHbName(result.getString("hbName"));
+                counting.setDugsu(result.getInt("dugsu"));
+
+                countingList.add(counting);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(pstmt != null) pstmt.close();
+                if(conn != null) conn.close();
+                if(result != null) result.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+
+        return countingList;
+    }
 }

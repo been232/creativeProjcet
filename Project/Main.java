@@ -6,6 +6,8 @@ import Project.Task.CandidateInfoTask;
 import Project.Persistance.PolicyDAO;
 import java.util.ArrayList;
 
+import Project.Persistance.*;
+
 public class Main {
     public static ClientConnecting connect;
 
@@ -13,14 +15,13 @@ public class Main {
 
 //        connect = new ClientConnecting();
 //        connect.start();
-        PolicyDAO dao = new PolicyDAO();
+        CountingDAO dao = new CountingDAO();
 
-        ArrayList<PolicyDTO> list = dao.getPolicyInfo("공화당");
-
+        ArrayList<CountingDTO> list = dao.getCountingInfo();
 //        ArrayList<CandidateDTO> list
 //
         for(int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getPrmsCont1());
+            System.out.println(list.get(i).getHbName() + list.get(i).getDugsu());
         }
     }
 }

@@ -142,6 +142,7 @@ public class CandidateDAO extends BasicDAOImpl {
             try {
                 if(pstmt != null) pstmt.close();
                 if(conn != null) conn.close();
+                if(result != null) result.close();
             } catch (Exception e) {
                 throw new RuntimeException(e.getMessage());
             }

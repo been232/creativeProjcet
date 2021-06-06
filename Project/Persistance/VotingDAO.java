@@ -82,4 +82,41 @@ public class VotingDAO extends BasicDAOImpl  {
         }
         return result;
     }
+
+    public ArrayList<VotingDTO> getVotingInfo() {
+        ArrayList<VotingDTO> votingList = new ArrayList<>();
+        String sql = "SELECT * FROM voting";
+
+        PreparedStatement pstmt = null;
+
+        ResultSet result = null;
+
+        try {
+            getConnection();
+            pstmt = conn.prepareStatement(sql);
+            result = pstmt.executeQuery();
+
+            while(result.next()) {
+                VotingDTO voting = new VotingDTO();
+                voting.setSgId(result.getString("sgId"));
+                voting.setSdName(result.getString("sdName"));
+                voting.setWiwName(result.getString("wiwName"));
+                voting.setTotTusu(result.getInt("totTusu"));
+                voting.setTurnOut(result.getInt("turnOut"));
+                votingList.add(voting);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(pstmt != null) pstmt.close();
+                if(conn != null) conn.close();
+                if(result != null) result.close();
+            } catch(Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+
+        return votingList;
+    }
 }

@@ -75,4 +75,39 @@ public class ElectionDAO extends BasicDAOImpl  {
         return result;
     }
 
+    public ArrayList<ElectionDTO> getElectionInfo() {
+        ArrayList<ElectionDTO> electionList = new ArrayList<>();
+        String sql = "SELECT * FROM election";
+
+        PreparedStatement pstmt = null;
+
+        ResultSet result = null;
+
+        try {
+            getConnection();
+            pstmt = conn.prepareStatement(sql);
+            result = pstmt.executeQuery();
+
+            while(result.next()) {
+                ElectionDTO election = new ElectionDTO();
+                election.setSgId(result.getString("sgId"));
+                election.setSgName(result.getString("sgName"));
+                election.setSgVotedate(result.getDate("sgVotedate"));
+
+                electionList.add(election);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(pstmt != null) pstmt.close();
+                if(conn != null) conn.close();
+                if(result != null) result.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+
+        return electionList;
+    }
 }

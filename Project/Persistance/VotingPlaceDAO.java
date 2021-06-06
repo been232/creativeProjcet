@@ -94,5 +94,45 @@ public class VotingPlaceDAO extends BasicDAOImpl   {
         }
         return result;
     }
+
+    public ArrayList<VotingPlaceDTO> getVotingPlaceInfo() {
+        ArrayList<VotingPlaceDTO> votingPlaceList = new ArrayList<>();
+        String sql = "SELECT * FROM votingplace";
+
+        PreparedStatement pstmt = null;
+
+        ResultSet result = null;
+
+        try {
+            getConnection();
+            pstmt = conn.prepareStatement(sql);
+            result = pstmt.executeQuery();
+
+            while(result.next()) {
+                VotingPlaceDTO votingPlace = new VotingPlaceDTO();
+                votingPlace.setSgId(result.getString("sgId"));
+                votingPlace.setPsName(result.getString("psName"));
+                votingPlace.setSdName(result.getString("sdName"));
+                votingPlace.setWiwName(result.getString("wiwName"));
+                votingPlace.setEmdName(result.getString("emdName"));
+                votingPlace.setPlaceName(result.getString("placeName"));
+                votingPlace.setAddr(result.getString("addr"));
+                votingPlace.setFloor(result.getString("floor"));
+
+                votingPlaceList.add(votingPlace);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(pstmt != null) pstmt.close();
+                if(conn != null) conn.close();
+                if(result != null) result.close();
+            } catch(Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return votingPlaceList;
+    }
 }
 
