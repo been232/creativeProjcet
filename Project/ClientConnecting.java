@@ -1,11 +1,13 @@
 package Project;
 
-import Project.Persistance.CountingDAO;
+import Project.Persistance.CandidateDTO;
 import Project.Protocol.ProtocolType;
+import Project.Task.CandidateInfoTask;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ClientConnecting {
     public static int PORT_NUMBER = 9594;
@@ -40,12 +42,14 @@ public class ClientConnecting {
             OutputStream os = null;
             BufferedReader br = null;
             PrintWriter pw = null;
+            ObjectOutputStream oos = null;
 
             try {
                 is = clSocket.getInputStream();
                 br = new BufferedReader(new InputStreamReader(is));
                 os = clSocket.getOutputStream();
                 pw = new PrintWriter(os, true);
+                oos = new ObjectOutputStream(clSocket.getOutputStream());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -53,20 +57,26 @@ public class ClientConnecting {
             String line = null;
             try {
                 line = br.readLine();
+                System.out.println(line);
+                oos.writeObject(checkProtocol((line)));
+                oos.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            pw.write(checkProtocol(line));
+            //pw.write(checkProtocol(line));
+
 
         }
     }
 
-    private String checkProtocol(String request) {
+    private ArrayList checkProtocol(String request) {
         String result = null;
+        ArrayList<CandidateDTO> candidateInfoTaskArrayList= new ArrayList<>();
         int code;
         ProtocolType type = ProtocolType.UNKNOWN;
         System.out.println("받은 요청 : " + request);
+
         try{
             code = Integer.parseInt(request);
             type = ProtocolType.values()[code];
@@ -82,10 +92,13 @@ public class ClientConnecting {
             case CAN_REQ:
             case CAN_RES:
                 result = "후보자 정보";
+                //result = new CandidateInfoTask().progressRequest();
+                candidateInfoTaskArrayList = new CandidateInfoTask().progressRequest();
                 break;
             case ELE_REQ:
             case ELE_RES:
                 result = "선거 목록";
+                candidateInfoTaskArrayList = new CandidateInfoTask().progressRequest();
                 break;
             case ELP_REQ:
             case ELP_RES:
@@ -117,6 +130,6 @@ public class ClientConnecting {
 
         System.out.println(result);
 
-        return result;
+        return candidateInfoTaskArrayList;
     }
 }

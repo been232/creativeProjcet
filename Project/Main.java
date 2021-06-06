@@ -13,15 +13,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        connect = new ClientConnecting();
-//        connect.start();
-        CountingDAO dao = new CountingDAO();
+        connect = new ClientConnecting();
+        connect.start();
+//        CountingDAO dao = new CountingDAO();
 
-        ArrayList<CountingDTO> list = dao.getCountingInfo();
+//        ArrayList<CountingDTO> list = dao.getCountingInfo();
 //        ArrayList<CandidateDTO> list
 //
-        for(int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getHbName() + list.get(i).getDugsu());
-        }
+//        for(int i = 0; i < list.size(); i++) {
+//            System.out.println(list.get(i).getHbName() + list.get(i).getDugsu());
+//        }
     }
 }

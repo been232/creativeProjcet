@@ -1,10 +1,23 @@
 package Project.Task;
 
-import Project.Persistance.*;
-import java.util.ArrayList;
-import java.sql.*;
-import java.util.Date;
+import Project.Persistance.CandidateDAO;
+import Project.Persistance.CandidateDTO;
 
-public class CandidateInfoTask extends BasicDAOImpl {
+import java.util.ArrayList;
+
+
+public class CandidateInfoTask {
+    ArrayList<CandidateDTO> candidateDTOList = new ArrayList<>();
+    CandidateDAO candidateDAO = new CandidateDAO();
+
+    public ArrayList<CandidateDTO> progressRequest() {
+        String result = "후보자 정보"; //null;
+        candidateDTOList = candidateDAO.getCandidateInfo();
+
+//        System.out.println(candidateDTO.get(0).getName());
+
+
+        return candidateDTOList;
+    }
 
 }
