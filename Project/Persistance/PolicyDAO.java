@@ -137,4 +137,67 @@ public class PolicyDAO extends BasicDAOImpl {
 
         return result;
     }
+
+    public ArrayList<PolicyDTO> getPolicyInfo(String jdName) {
+        ArrayList<PolicyDTO> policyList = new ArrayList<>();
+        String sql = "SELECT * FROM policy WHERE jdName = ?";
+
+        PreparedStatement pstmt = null;
+        ResultSet result = null;
+        PolicyDTO policy = new PolicyDTO();
+
+        try {
+            getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, jdName);
+            result = pstmt.executeQuery();
+            while(result.next()) {
+                policy.setPrmsRealmName1(result.getString("prmsRealmName1"));
+                policy.setPrmsRealmName2(result.getString("prmsRealmName2"));
+                policy.setPrmsRealmName3(result.getString("prmsRealmName3"));
+                policy.setPrmsRealmName4(result.getString("prmsRealmName4"));
+                policy.setPrmsRealmName5(result.getString("prmsRealmName5"));
+                policy.setPrmsRealmName6(result.getString("prmsRealmName6"));
+                policy.setPrmsRealmName7(result.getString("prmsRealmName7"));
+                policy.setPrmsRealmName8(result.getString("prmsRealmName8"));
+                policy.setPrmsRealmName9(result.getString("prmsRealmName9"));
+                policy.setPrmsRealmName10(result.getString("prmsRealmName10"));
+
+                policy.setPrmsTitle1(result.getString("prmsTitle1"));
+                policy.setPrmsTitle2(result.getString("prmsTitle2"));
+                policy.setPrmsTitle3(result.getString("prmsTitle3"));
+                policy.setPrmsTitle4(result.getString("prmsTitle4"));
+                policy.setPrmsTitle5(result.getString("prmsTitle5"));
+                policy.setPrmsTitle6(result.getString("prmsTitle6"));
+                policy.setPrmsTitle7(result.getString("prmsTitle7"));
+                policy.setPrmsTitle8(result.getString("prmsTitle8"));
+                policy.setPrmsTitle9(result.getString("prmsTitle9"));
+                policy.setPrmsTitle10(result.getString("prmsTitle10"));
+
+                policy.setPrmsCont1(result.getString("prmmCont1"));
+                policy.setPrmsCont2(result.getString("prmmCont2"));
+                policy.setPrmsCont3(result.getString("prmmCont3"));
+                policy.setPrmsCont4(result.getString("prmmCont4"));
+                policy.setPrmsCont5(result.getString("prmmCont5"));
+                policy.setPrmsCont6(result.getString("prmmCont6"));
+                policy.setPrmsCont7(result.getString("prmmCont7"));
+                policy.setPrmsCont8(result.getString("prmmCont8"));
+                policy.setPrmsCont9(result.getString("prmmCont9"));
+                policy.setPrmsCont10(result.getString("prmmCont10"));
+
+                policyList.add(policy);
+            }
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(result != null) result.close();
+                if(pstmt != null) pstmt.close();
+                if(conn != null) conn.close();
+            } catch(Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return policyList;
+    }
 }

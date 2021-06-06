@@ -111,4 +111,42 @@ public class CandidateDAO extends BasicDAOImpl {
         }
         return result;
     }
+
+
+    public ArrayList<CandidateDTO> getCandidateInfo() {
+        ArrayList<CandidateDTO> candidateList = new ArrayList<>();
+        String sql = "SELECT name, giho, jdName, birthday, edu, career1 FROM candidate";
+
+        PreparedStatement pstmt = null;
+
+        ResultSet result = null;
+
+        try {
+            getConnection();
+            pstmt = conn.prepareStatement(sql);
+            result = pstmt.executeQuery();
+
+            while(result.next()) {
+                CandidateDTO candidate = new CandidateDTO();
+                candidate.setName(result.getString("name"));
+                candidate.setJdName(result.getString("giho"));
+                candidate.setBirthday(result.getDate("birthday"));
+                candidate.setEdu(result.getString("edu"));
+                candidate.setCareer1(result.getString("career1"));
+
+                candidateList.add(candidate);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(pstmt != null) pstmt.close();
+                if(conn != null) conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return candidateList;
+    }
+
 }

@@ -74,4 +74,5 @@ public class ElectionDAO extends BasicDAOImpl  {
         }
         return result;
     }
+
 }

@@ -9,7 +9,7 @@ public class BasicDAOImpl implements BasicDAO {
     static final String URL = "jdbc:mysql://14.45.204.156:3306/project?characterEncoding=utf8&serverTimezone=UTC&useSSL=false";
     static final String USER = "shj";
     static final String PW = "tmdgus9435";
-    Connection conn = null;
+    public Connection conn = null;
 
     static {
         try {
