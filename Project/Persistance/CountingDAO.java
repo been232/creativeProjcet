@@ -94,7 +94,7 @@ public class CountingDAO extends BasicDAOImpl{
 
                 result = pstmt.executeUpdate();
             } catch (SQLException se) {
-                System.out.println(sggName + " " + sdName + " " + wiwName + hubo.get(i) + " " + jd.get(i));
+ //               System.out.println(sggName + " " + sdName + " " + wiwName + hubo.get(i) + " " + jd.get(i));
                 se.printStackTrace();
             } finally {
                 try {

@@ -1,6 +1,5 @@
 package Project;
 
-
 public class Main {
     public static ClientConnecting connect;
 
@@ -9,5 +8,4 @@ public class Main {
         connect = new ClientConnecting();
         connect.start();
 
-    }
 }
