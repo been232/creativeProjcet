@@ -1,8 +1,10 @@
 package Project;
 
 import Project.Persistance.CandidateDTO;
+import Project.Persistance.ElectionDTO;
 import Project.Protocol.ProtocolType;
 import Project.Task.CandidateInfoTask;
+import Project.Task.ElectionInfoTask;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -28,8 +30,6 @@ public class ClientConnecting {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //CountingDAO dao = new CountingDAO();
-        //dao.parsing();
     }
 
     public class Client extends Thread{
@@ -42,41 +42,31 @@ public class ClientConnecting {
             OutputStream os = null;
             BufferedReader br = null;
             PrintWriter pw = null;
-            ObjectOutputStream oos = null;
             ObjectInputStream ois = null;
+            ObjectOutputStream oos = null;
+
             try {
-//                is = clSocket.getInputStream();
-//                br = new BufferedReader(new InputStreamReader(is));
-//                os = clSocket.getOutputStream();
-//                pw = new PrintWriter(os, true);
-                oos = new ObjectOutputStream(clSocket.getOutputStream());
                 ois = new ObjectInputStream(clSocket.getInputStream());
+                oos = new ObjectOutputStream(clSocket.getOutputStream());
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             String line = null;
             try {
-//                line = br.readLine();
                 line = (String) ois.readObject();
-                System.out.println(line);
-                ArrayList<CandidateDTO> dto = checkProtocol(line);
-                oos.writeObject(dto);
-                System.out.println(dto.get(0).getName());
-                oos.flush();
+                checkProtocol(line, ois, oos);
+//
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
-            //pw.write(checkProtocol(line));
-
-
         }
     }
 
-    private ArrayList<CandidateDTO> checkProtocol(String request) {
+    private void checkProtocol(String request, ObjectInputStream ois, ObjectOutputStream oos) {
         String result = null;
-        ArrayList<CandidateDTO> candidateInfoTaskArrayList= new ArrayList<>();
+        ArrayList<CandidateDTO> candidateInfoList = new ArrayList<>();
+        ArrayList<ElectionDTO> electionInfoList = new ArrayList<>();
         int code;
         ProtocolType type = ProtocolType.UNKNOWN;
         System.out.println("받은 요청 : " + request);
@@ -96,13 +86,30 @@ public class ClientConnecting {
             case CAN_REQ:
             case CAN_RES:
                 result = "후보자 정보";
-                //result = new CandidateInfoTask().progressRequest();
-                candidateInfoTaskArrayList = new CandidateInfoTask().progressRequest();
+                try {
+                    candidateInfoList = new CandidateInfoTask().progressRequest();
+                    oos.writeObject(candidateInfoList);
+                    System.out.println(candidateInfoList.get(0).getName());
+                    oos.flush();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             case ELE_REQ:
             case ELE_RES:
                 result = "선거 목록";
-                candidateInfoTaskArrayList = new CandidateInfoTask().progressRequest();
+                try {
+                    electionInfoList = new ElectionInfoTask().progressRequest();
+                    oos.writeObject(electionInfoList);
+                    System.out.println(electionInfoList.get(0).getSgName());
+                    oos.flush();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                electionInfoList = new ElectionInfoTask().progressRequest();
+                //return electionInfoTaskArrayList;
                 break;
             case ELP_REQ:
             case ELP_RES:
@@ -134,6 +141,6 @@ public class ClientConnecting {
 
         System.out.println(result);
 
-        return candidateInfoTaskArrayList;
+
     }
 }
