@@ -1,8 +1,9 @@
 package Project.Persistance;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ElectionDTO {
+public class ElectionDTO implements Serializable {
     private String sgId;
     private String sgName;
     private Date sgVotedate;
