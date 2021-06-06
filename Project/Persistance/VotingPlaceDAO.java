@@ -10,10 +10,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class VotingPlaceDAO {
+import java.sql.*;
+
+public class VotingPlaceDAO extends BasicDAOImpl   {
     public VotingPlaceDAO() {}
 
-    public static void main(String[] args) {        // parsing으로 네이밍 변경 필요
+    public int parsing(){
         String[] sd = new String[]{
                 "서울특별시", "부산광역시", "대구광역시",
                 "인천광역시", "광주광역시", "대전광역시",
@@ -24,6 +26,7 @@ public class VotingPlaceDAO {
         };
         String key = "y9FWlTb%2BlJWwvrBNeooAhHEHzOKRLkQkNz8RsSVu5TTpBz9lFSobT9LwSUOa1hFFYcL%2FWjMMZ%2Bm8yJxUdwsiGg%3D%3D";
         String result = "";
+        int dbResult = 0;
         try {
             for(int i = 0; i < sd.length; i++) {
                 String sdEncodeResult = URLEncoder.encode(sd[i], "UTF-8");
@@ -49,11 +52,47 @@ public class VotingPlaceDAO {
                     String placeName = (String) votingPlace.get("PLACE_NAME");
                     String addr = (String) votingPlace.get("ADDR");
                     String floor = (String) votingPlace.get("FLOOR");
+                    if (!sdName.equals("합계") && !wiwName.equals("합계")) {
+                        insert(sgId, psName, sdName, wiwName, emdName,placeName,addr,floor);
+                    }
                 }
             }
         } catch(Exception e) {
             e.printStackTrace();
         }
+        return dbResult;
+    }
+    public int insert(String sgId,String psName,String sdName,String wiwName,String emdName, String placeName,String addr, String floor){
+
+        String sql = "INSERT INTO votingPlace(sgId, psName, sdName, wiwName, emdName,placeName,addr,floor) values(?,?,?,?,?,?,?,?)";
+
+        PreparedStatement pstmt = null;
+        int result = 0;
+        try {
+            getConnection();
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, sgId);
+            pstmt.setString(2, psName);
+            pstmt.setString(3, sdName);
+            pstmt.setString(4, wiwName);
+            pstmt.setString(5, emdName);
+            pstmt.setString(6, placeName);
+            pstmt.setString(7, addr);
+            pstmt.setString(8, floor);
+
+            result = pstmt.executeUpdate();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+        return result;
     }
 }
 
