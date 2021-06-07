@@ -15,13 +15,8 @@ public class Main {
 
         connect = new ClientConnecting();
         connect.start();
-//        CountingDAO dao = new CountingDAO();
+        //VotingDAO dao = new VotingDAO();
+        //dao.getSdName();
 
-//        ArrayList<CountingDTO> list = dao.getCountingInfo();
-//        ArrayList<CandidateDTO> list
-//
-//        for(int i = 0; i < list.size(); i++) {
-//            System.out.println(list.get(i).getHbName() + list.get(i).getDugsu());
-//        }
     }
 }

@@ -124,11 +124,10 @@ public class VotingDAO extends BasicDAOImpl {
 
     public ArrayList<VotingDTO> getSdName() {
         ArrayList<VotingDTO> votingList = new ArrayList<>();
-        String sql = "SELECT sdName, wiwName FROM voting";
+        String sql = "SELECT sdName, wiwName FROM voting WHERE sdName = \"서울특별시\"";
 
         PreparedStatement pstmt = null;
         ResultSet result = null;
-        VotingDTO voting = new VotingDTO();
 
         try {
             getConnection();
@@ -136,6 +135,7 @@ public class VotingDAO extends BasicDAOImpl {
             result = pstmt.executeQuery();
 
             while (result.next()) {
+                VotingDTO voting = new VotingDTO();
                 voting.setSdName(result.getString("sdName"));
                 voting.setWiwName(result.getString("wiwName"));
                 votingList.add(voting);
@@ -153,5 +153,6 @@ public class VotingDAO extends BasicDAOImpl {
         }
 
         return votingList;
+
     }
 }

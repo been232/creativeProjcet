@@ -151,9 +151,9 @@ public class CandidateDAO extends BasicDAOImpl {
         return candidateList;
     }
 
-    public ArrayList<CandidateDTO> getCandidateName(String sggName) {
+    public ArrayList<CandidateDTO> getCandidateName(String sdName, String wiwName) {
         ArrayList<CandidateDTO> candidateList = new ArrayList<>();
-        String sql = " SELECT name FROM project.candidate WHERE sggName = ?";
+        String sql = "SELECT name FROM project.candidate WHERE sdName = ? AND wiwName = ?";
 
         PreparedStatement pstmt = null;
         ResultSet result = null;
@@ -161,7 +161,8 @@ public class CandidateDAO extends BasicDAOImpl {
         try {
             getConnection();
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, sggName);
+            pstmt.setString(1, sdName);
+            pstmt.setString(2, wiwName);
             result = pstmt.executeQuery();
             while(result.next()) {
                 CandidateDTO candidate = new CandidateDTO();
@@ -182,5 +183,4 @@ public class CandidateDAO extends BasicDAOImpl {
 
         return candidateList;
     }
-
 }
