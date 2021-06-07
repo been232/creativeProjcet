@@ -2,9 +2,11 @@ package Project;
 
 import Project.Persistance.CandidateDTO;
 import Project.Persistance.ElectionDTO;
+import Project.Persistance.VotingDTO;
 import Project.Protocol.ProtocolType;
 import Project.Task.CandidateInfoTask;
 import Project.Task.ElectionInfoTask;
+import Project.Task.VotingInfoTask;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -67,6 +69,7 @@ public class ClientConnecting {
         String result = null;
         ArrayList<CandidateDTO> candidateInfoList = new ArrayList<>();
         ArrayList<ElectionDTO> electionInfoList = new ArrayList<>();
+        ArrayList<VotingDTO> votingInfoList = new ArrayList<>();
         int code;
         ProtocolType type = ProtocolType.UNKNOWN;
         System.out.println("받은 요청 : " + request);
@@ -86,13 +89,19 @@ public class ClientConnecting {
             case CAN_REQ:
             case CAN_RES:
                 result = "후보자 정보";
+                String sdName = null, wiwName = null;
                 try {
-                    candidateInfoList = new CandidateInfoTask().progressRequest();
+                    //votingInfoList = new VotingInfoTask().progressRequest();
+
+                    sdName = (String) ois.readObject();
+                    wiwName = (String) ois.readObject();
+                    System.out.println(sdName + ", " + wiwName);
+
+                    candidateInfoList = new CandidateInfoTask().progressRequest(sdName, wiwName);
                     oos.writeObject(candidateInfoList);
-                    System.out.println(candidateInfoList.get(0).getName());
                     oos.flush();
 
-                } catch (IOException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
                 break;
@@ -102,14 +111,11 @@ public class ClientConnecting {
                 try {
                     electionInfoList = new ElectionInfoTask().progressRequest();
                     oos.writeObject(electionInfoList);
-                    System.out.println(electionInfoList.get(0).getSgName());
                     oos.flush();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                electionInfoList = new ElectionInfoTask().progressRequest();
-                //return electionInfoTaskArrayList;
                 break;
             case ELP_REQ:
             case ELP_RES:
@@ -133,7 +139,15 @@ public class ClientConnecting {
                 break;
             case VOC_REQ:
             case VOC_RES:
-                result = "9";
+                result = "투표수";
+                try {
+                    votingInfoList = new VotingInfoTask().progressRequest();
+                    oos.writeObject(votingInfoList);
+                    oos.flush();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 System.out.println("아... 안돼...");
